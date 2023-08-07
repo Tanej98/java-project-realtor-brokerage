@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/tanej/fsdt/csd3464/workspace/java-project-realtor-brokerage/RealtorBrokerage/src/lib/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="./src/lib/mysql-connector-j-8.0.33.jar"/>
 	<classpathentry kind="output" path="RealtorBrokerage/bin"/>
 </classpath>

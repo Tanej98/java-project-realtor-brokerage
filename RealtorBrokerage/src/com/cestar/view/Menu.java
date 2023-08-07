@@ -35,7 +35,7 @@ public class Menu {
                     break;
                 case 5:
                     choice = 5;
-                    System.out.println("See ya!!");
+                    System.out.println("Thanks for using Realtor Brokerage!");
                     break;
             }
 		}

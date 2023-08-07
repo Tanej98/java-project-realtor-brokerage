@@ -65,8 +65,13 @@ public class controller {
 		if(id.isEmpty()) {
 			dealDao.displayRecords();
 		}else {
-			int property_id = Integer.parseInt(id);
-			dealDao.getRecordById(property_id);
+			try {
+				int property_id = Integer.parseInt(id);
+				dealDao.getRecordById(property_id);
+			}
+			catch(NumberFormatException e){
+				System.out.println("\n$$Enter valid input$$");
+			}
 		}
 	}
 	
@@ -74,60 +79,74 @@ public class controller {
 	 * updateController takes the values from user which need to be updated
 	 */
 	public void updateController() {
-		System.out.println("Update record");
-		System.out.println("Enter the id of the property: ");
-		int id = sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter the name of the agent: ");
-		String agentName = sc.nextLine();
-		if(agentName.isEmpty()) {
-			agentName = null;
-		}
-		System.out.println("Enter the asking price of the property or -1 to not update the value: ");
-		Double askingPrice = sc.nextDouble();
-		if(askingPrice == -1) {
-			askingPrice = null;
-		}
-		sc.nextLine();
-		System.out.println("Enter the region of the property: ");
-		String region = sc.nextLine();
-		if(region.isEmpty()) {
-			region = null;
-		}
-		System.out.println("Enter the type of the property: ");
-		String type = sc.nextLine();
-		if(type.isEmpty()) {
-			type = null;
-		}
-		System.out.println("Enter the closing date for the property(dd-mm-yyyy): ");
-		String dateStr = sc.nextLine();
-		
-		Date closingDate = null;
-		if(dateStr.isEmpty()) {
-			dateStr = null;
-		}else {
-			try {
-				closingDate = new SimpleDateFormat("dd-mm-yyyy").parse(dateStr);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			System.out.println("Update record");
+			System.out.println("Enter the id of the property: ");
+			int id = sc.nextInt();
+			sc.nextLine();
+			System.out.println("Enter the name of the agent: ");
+			String agentName = sc.nextLine();
+			if(agentName.isEmpty()) {
+				agentName = null;
 			}
+			System.out.println("Enter the asking price of the property or -1 to not update the value: ");
+			Double askingPrice = sc.nextDouble();
+			if(askingPrice == -1) {
+				askingPrice = null;
+			}
+			sc.nextLine();
+			System.out.println("Enter the region of the property: ");
+			String region = sc.nextLine();
+			if(region.isEmpty()) {
+				region = null;
+			}
+			System.out.println("Enter the type of the property: ");
+			String type = sc.nextLine();
+			if(type.isEmpty()) {
+				type = null;
+			}
+			System.out.println("Enter the closing date for the property(dd-mm-yyyy): ");
+			String dateStr = sc.nextLine();
+			
+			Date closingDate = null;
+			if(dateStr.isEmpty()) {
+				dateStr = null;
+			}else {
+				try {
+					closingDate = new SimpleDateFormat("dd-mm-yyyy").parse(dateStr);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			// updating the record
+			Property deal_record = new Property(id, agentName, askingPrice, region, type, closingDate);
+			dealDao.updateRecordById(id, deal_record);
 		}
-		// updating the record
+		catch(Exception e) {
+			
+		}
 		
-		Property deal_record = new Property(id, agentName, askingPrice, region, type, closingDate);
-		dealDao.updateRecordById(id, deal_record);
+		
 	}
 	
 	/**
 	 * deleteController takes id from the user and it deletes the record from the database
 	 */
 	public void deleteController() {
-		System.out.println("Delete record::");
-		System.out.println("Enter the id of the property: ");
-		int id = sc.nextInt();
-		sc.nextLine();
-		
-		dealDao.deleteRecordById(id);
+		try {
+			System.out.println("Delete record:");
+			System.out.println("Enter the id of the property: ");
+			int id = sc.nextInt();
+			sc.nextLine();
+			
+			dealDao.deleteRecordById(id);
+		}
+		catch(Exception e) {
+			sc.nextLine();
+			System.out.println("\n$$Enter valid input$$");
+
+		}
 	}
 }

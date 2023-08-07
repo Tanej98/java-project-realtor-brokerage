@@ -107,7 +107,7 @@ public class recordDao {
             	System.out.println();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("$$Database ERROR$$");
         }
         return deals;
     }
@@ -170,12 +170,12 @@ public class recordDao {
                 pstmt.setDate(1, convertDate(updated_deal.getClosingDate()));
             }
             sql = pstmt.toString().split(":")[1];
-            sql = sql.substring(0, sql.lastIndexOf(','));
+            if(sql.lastIndexOf(',') != -1) {
+                sql = sql.substring(0, sql.lastIndexOf(','));
+            }
             sql += " where PropertyId=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,deal_id);
-            System.out.println(pstmt);
-            System.out.println(sql);
             int status = pstmt.executeUpdate();
             if(status >0){
                 System.out.println("Record updated");

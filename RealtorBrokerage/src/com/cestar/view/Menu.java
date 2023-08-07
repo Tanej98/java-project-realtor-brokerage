@@ -1,5 +1,6 @@
 package com.cestar.view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.cestar.controller.controller;
 
@@ -17,27 +18,36 @@ public class Menu {
 		int choice = 0;
 		System.out.println("Welcome to Realtor Brokerage");
 		while(choice != 5) {
-			System.out.println("Enter your choice \n1.display\n2.insert\n3.update\n4.delete\n5.exit");
-			choice = sc.nextInt();
+			try {
+				System.out.println("\nSelect option \n\t1.display\n\t2.insert\n\t3.update\n\t4.delete\n\t5.exit");
+				choice = sc.nextInt();
 
-            switch(choice){
-                case 1:
-                    ctlr.displayController();
-                    break;
-                case 2:
-                    ctlr.insertController();
-                    break;
-                case 3:
-                    ctlr.updateController();
-                    break;
-                case 4:
-                    ctlr.deleteController();
-                    break;
-                case 5:
-                    choice = 5;
-                    System.out.println("Thanks for using Realtor Brokerage!");
-                    break;
-            }
+	            switch(choice){
+	                case 1:
+	                    ctlr.displayController();
+	                    break;
+	                case 2:
+	                    ctlr.insertController();
+	                    break;
+	                case 3:
+	                    ctlr.updateController();
+	                    break;
+	                case 4:
+	                    ctlr.deleteController();
+	                    break;
+	                case 5:
+	                    choice = 5;
+	                    System.out.println("Thanks for using Realtor Brokerage!");
+	                    break;
+	                default:
+	                	throw new InputMismatchException();
+	            }
+			}
+			catch(InputMismatchException e) {
+				sc.nextLine();
+				System.out.println("\n$$Enter valid input$$");
+				continue;
+			}
 		}
 		sc.close();
 	}
